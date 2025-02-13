@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Feliz San Valentin Rebeca, Amor mío</title>
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <h1 id="title">FELIZ SAN VALENTIN REBECA, EL AMOR DE MI VIDA</h1>
+    <div class="heart" id="heart">
+        <p id="heartMessage">Felíz San Valentín amorcito lindo, gracias por este año de amor y los otros años de amistad
+            incondicional, eres mi todo y espero que nuestro amor sea eterno❤️✨</p>
+    </div>
+
+    <p id="countdown"></p>
+    <p id="loveMessage"></p>
+
+    <!-- Botón de reproducción de música -->
+    <button id="playButton">Dale click a este botón antes de leer xd Te amooooooo</button>
+
+    <!-- Audio de la música -->
+    <audio id="loveMusic" loop>
+        <source src="song/Sabrina Carpenter - Juno.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.1/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Reproducir música cuando se haga clic en el botón
+        document.getElementById("playButton").addEventListener("click", function () {
+            document.getElementById("loveMusic").play();
+            this.style.display = "none"; // Ocultar el botón después de hacer clic
+        });
+
+        const img = new Image();
+        img.src = "img/corazon.png";  // Asegúrate de tener la imagen correcta en la carpeta 'img'
+
+        img.onload = function () {
+            console.log("Imagen cargada, iniciando particles.js...");
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": {
+                        "value": 30
+                    },
+                    "shape": {
+                        "type": "image",
+                        "image": {
+                            "src": "img/corazon.png",  // Asegúrate de tener la imagen correcta en la carpeta 'img'
+                            "width": 100,
+                            "height": 100
+                        }
+                    },
+                    "size": {
+                        "value": 40
+                    },
+                    "move": {
+                        "speed": 2,
+                        "direction": "bottom",
+                        "out_mode": "out"
+                    }
+                }
+            });
+        };
+
+        img.onerror = function () {
+            console.error("Error: La imagen no se encontró.");
+        };
+
+        // Efecto de confeti
+        setInterval(() => {
+            confetti({
+                particleCount: 100,
+                spread: 60,
+                origin: { x: 0.5, y: 0.5 }
+            });
+        }, 2000);
+
+        // Cambio de mensaje y reproducción de música al hacer clic en el corazón
+        document.getElementById("heart").addEventListener("click", function () {
+            document.getElementById("heartMessage").innerHTML = "Así late mi corazón por ti bebé, cuando quieras lo aceleramos juntos ¬¬ XD . Te amo enserio ❤️";
+        });
+
+        // Cuenta regresiva para una fecha especial
+        let countDownDate = new Date("Nov 7, 2025 00:00:00").getTime();
+        let x = setInterval(function () {
+            let now = new Date().getTime();
+            let distance = countDownDate - now;
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById("countdown").innerHTML = "Faltan " + days + " días para nuestro próxima aniversario ❤️";
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "¡Hoy es nuestro día especial!, Feliz aniversariooo, si de casualidad entraste a esta página cuando ya es nuestro aniversario, que sepas que escribiendo desde el pasado sé que te amo muchisimo y eres la mejor persona del mundo mundial, te amo montones y espero que podamos pasar un día increible 💖";
+            }
+        }, 1000);
+
+        // Efecto de máquina de escribir para el mensaje de amor
+        let text = "Quiero agradecerte por todo lo que haces por mi y el cariño que me das, sé que a veces soy difícil de sobrellevar pero intento hacer todo bien por ti, te amo muchisimo enserio y quiero una vida entera a tu lado, agradezco a la vida por traerme a mi persona favorita en el mundo, te amo ❤️";
+        let index = 0;
+        function typeWriter() {
+            if (index < text.length) {
+                // Si el índice es múltiplo de 50, agrega un salto de línea
+                if (index % 100 === 0 && index !== 0) {
+                    document.getElementById("loveMessage").innerHTML += "<br>";
+                }
+                // Añadir el siguiente carácter del texto
+                document.getElementById("loveMessage").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 80);
+            }
+        }
+        setTimeout(typeWriter, 2000);
+
+        // Partículas de corazones flotando
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 50 },
+                "shape": { "type": "heart" },
+                "size": { "value": 5 }
+            }
+        });
+    </script>
+</body>
+
+</html>
